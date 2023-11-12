@@ -181,3 +181,74 @@ async def process_response(
                 color=discord.Color.yellow(),
             )
         )
+
+
+async def process_response_file(
+    user: str, thread: discord.Thread, response_file: str
+):
+    # status = response_data.status
+    # reply_text = response_data.reply_text
+    # status_text = response_data.status_text
+
+    # send back audio file
+    print("response_file_path: ", response_file)
+    await thread.send(file=discord.File(response_file))
+
+    # if status is CompletionResult.OK or status is CompletionResult.MODERATION_FLAGGED:
+    #     sent_message = None
+    #     if not reply_text:
+    #         sent_message = await thread.send(
+    #             embed=discord.Embed(
+    #                 description=f"**Invalid response** - empty response",
+    #                 color=discord.Color.yellow(),
+    #             )
+    #         )
+    #     else:
+    #         shorter_response = split_into_shorter_messages(reply_text)
+    #         for r in shorter_response:
+    #             sent_message = await thread.send(r)
+    #     if status is CompletionResult.MODERATION_FLAGGED:
+    #         await send_moderation_flagged_message(
+    #             guild=thread.guild,
+    #             user=user,
+    #             flagged_str=status_text,
+    #             message=reply_text,
+    #             url=sent_message.jump_url if sent_message else "no url",
+    #         )
+
+    #         await thread.send(
+    #             embed=discord.Embed(
+    #                 description=f"⚠️ **This conversation has been flagged by moderation.**",
+    #                 color=discord.Color.yellow(),
+    #             )
+    #         )
+    # elif status is CompletionResult.MODERATION_BLOCKED:
+    #     await send_moderation_blocked_message(
+    #         guild=thread.guild,
+    #         user=user,
+    #         blocked_str=status_text,
+    #         message=reply_text,
+    #     )
+
+    #     await thread.send(
+    #         embed=discord.Embed(
+    #             description=f"❌ **The response has been blocked by moderation.**",
+    #             color=discord.Color.red(),
+    #         )
+    #     )
+    # elif status is CompletionResult.TOO_LONG:
+    #     await close_thread(thread)
+    # elif status is CompletionResult.INVALID_REQUEST:
+    #     await thread.send(
+    #         embed=discord.Embed(
+    #             description=f"**Invalid request** - {status_text}",
+    #             color=discord.Color.yellow(),
+    #         )
+    #     )
+    # else:
+    #     await thread.send(
+    #         embed=discord.Embed(
+    #             description=f"**Error** - {status_text}",
+    #             color=discord.Color.yellow(),
+    #         )
+    #     )
