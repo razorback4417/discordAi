@@ -19,7 +19,7 @@ from src.utils import (
     discord_message_to_message,
 )
 from src import completion
-from src.completion import generate_completion_response, process_response
+from src.completion import generate_completion_response, process_response, process_response_file
 from src.moderation import (
     moderate_message,
     send_moderation_blocked_message,
@@ -132,6 +132,7 @@ async def chat_command(int: discord.Interaction, message: str):
             response_data = await generate_completion_response(
                 messages=messages, user=user
             )
+
             # send the result
             await process_response(
                 user=user, thread=thread, response_data=response_data
@@ -246,9 +247,9 @@ async def on_message(message: DiscordMessage):
 
         # generate the response
         async with thread.typing():
-            response_data = await generateElevenRecording(generate_completion_response(
+            response_data = await generate_completion_response(
                 messages=channel_messages, user=message.author
-            ))
+            )
 
         if is_last_message_stale(
             interaction_message=message,

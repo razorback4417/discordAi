@@ -5,8 +5,8 @@ CHUNK_SIZE = 1024
 
 XI_API_KEY = "3cd06380b66b2b0b1238146614b2eeb5"
 VOICE_ID = "EXAVITQu4vr4xnSDxMaL"
-TEXT_TO_SPEAK = ""
-OUTPUT_PATH = "output.mp3"
+TEXT_TO_SPEAK = "how is your day?"
+OUTPUT_PATH = "output2.mp3"
 
 tts_url = f"https://api.elevenlabs.io/v1/text-to-speech/{VOICE_ID}/stream"
 
@@ -39,3 +39,5 @@ def generateElevenRecording(textInput):
 
     print(f"Finished writing audio file to {OUTPUT_PATH}")
     return OUTPUT_PATH
+
+generateElevenRecording("how is your day?")
