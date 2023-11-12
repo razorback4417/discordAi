@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from openai import OpenAI
 import openai
 
+from src.basicInfo import info_map
 
 from src.moderation import moderate_message
 from typing import Optional, List
@@ -55,11 +56,23 @@ async def generate_completion_response(
         )
         rendered = prompt.render()
 
+        content_text = ("You are a helpful assistant that talks like a person named Jeffrey. "
+                        + "You have the following information as your context to answer question: "
+                        + info_map["basic"] + " | And here comes the information for my recent life: "
+                        + info_map["advanced"] + info_map["advanced_last3"] + info_map["advanced_last2"] + info_map["advanced_last1"]
+                        + "."
+        )
+
         response = client.chat.completions.create(
             model="ft:gpt-3.5-turbo-0613:personal:jeffrey-model:8DyiLSXo",
             messages=[
-                {"role": "system", "content": "You are a helpful assistant that talks like a person named Jeffrey."},
-                {"role": "user", "content": rendered},
+                {
+                    "role": "system", 
+                    "content": content_text
+                },
+                {
+                    "role": "user", "content": rendered
+                },
             ],
         )
 
