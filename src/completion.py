@@ -67,7 +67,7 @@ async def generate_completion_response(
             model="ft:gpt-3.5-turbo-0613:personal:jeffrey-model:8DyiLSXo",
             messages=[
                 {
-                    "role": "system", 
+                    "role": "system",
                     "content": content_text
                 },
                 {

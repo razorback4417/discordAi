@@ -26,6 +26,8 @@ from src.moderation import (
     send_moderation_flagged_message,
 )
 
+from src.eleven import generateElevenRecording
+
 logging.basicConfig(
     format="[%(asctime)s] [%(filename)s:%(lineno)d] %(message)s", level=logging.INFO
 )
@@ -244,9 +246,9 @@ async def on_message(message: DiscordMessage):
 
         # generate the response
         async with thread.typing():
-            response_data = await generate_completion_response(
+            response_data = await generateElevenRecording(generate_completion_response(
                 messages=channel_messages, user=message.author
-            )
+            ))
 
         if is_last_message_stale(
             interaction_message=message,
