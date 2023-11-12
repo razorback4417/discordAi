@@ -258,11 +258,24 @@ async def on_message(message: DiscordMessage):
         ):
             # there is another message and its not from us, so ignore this response
             return
+        
+        # use generateElevenRecording to convert text to audio
+        # response_data.reply_text can be Optional if none return text data else return audio file path
+        if response_data.reply_text == None:
+            # send response
+            await process_response(
+                user=message.author, thread=thread, response_data=response_data
+            )
 
-        # send response
-        await process_response(
-            user=message.author, thread=thread, response_data=response_data
-        )
+        else:
+            response_file = generateElevenRecording(response_data.reply_text)
+            print("response_file is ready: ", response_file)
+            # send response
+            await process_response_file(
+                user=message.author, thread=thread, response_file=response_file
+            )
+
+        
     except Exception as e:
         logger.exception(e)
 
