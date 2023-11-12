@@ -6,7 +6,7 @@ CHUNK_SIZE = 1024
 XI_API_KEY = "215264bda5909baa2209a775039586f4"
 VOICE_ID = "3HvsYcfM7edGBSii5w9U"
 TEXT_TO_SPEAK = "how is your day?"
-OUTPUT_PATH = "output2.mp3"
+# OUTPUT_PATH = "output2.mp3"
 
 tts_url = f"https://api.elevenlabs.io/v1/text-to-speech/{VOICE_ID}/stream"
 
@@ -16,7 +16,16 @@ headers = {
   "Content-Type": "application/json"
 }
 
+# 
 def generateElevenRecording(textInput):
+    # generate a random number from 0 to 1000000
+    import random
+    randomNum = random.randint(0, 1000000)
+
+    # turn the random number into a string
+    randomNumStr = str(randomNum)
+
+    OUTPUT_PATH = "response" + "_" + textInput[:10] + "_" + randomNumStr + ".mp3"
     # This is the data that we're going to send with our request. It's a Python dictionary which will be converted into a JSON object.
     TEXT_TO_SPEAK = textInput
     data = {

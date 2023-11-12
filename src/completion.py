@@ -57,10 +57,10 @@ async def generate_completion_response(
         rendered = prompt.render()
 
         content_text = ("You are a helpful assistant that talks like a person named Jeffrey. "
-                        + "You have the following information as your context to answer question: "
+                        + "You have the following information as your helpful context but if the question is outside of the information provided, answer the question generally. you do not need to answer everything based on the context given : \n\n"
                         + info_map["basic"] + " | And here comes the information for my recent life: "
                         + info_map["advanced"] + info_map["advanced_last3"] + info_map["advanced_last2"] + info_map["advanced_last1"]
-                        + "."
+                        + "\n\nyou do not need to answer everything based on the context given."
         )
 
         response = client.chat.completions.create(
