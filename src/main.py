@@ -287,7 +287,7 @@ async def on_message(message: DiscordMessage):
             await process_response_file(
                 user=message.author, thread=thread, response_file=response_file
             )
-
+ 
         
     except Exception as e:
         logger.exception(e)
